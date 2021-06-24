@@ -21,7 +21,7 @@
 
   	<button 
 		onclick="ajaxPhpFn({
-			uri: 'buttonCall', 
+			uri: '/ajax-php-function/Hello/world/1234', 
 			sendToId: 'buttonResult'})" 
 		type="button">
 			Just a button
@@ -34,8 +34,7 @@
   <script src="appfun.js"></script>
   <script>
     // Onload example  
-    //ajaxPhpFn('main.php', 'simple_test');
-    ajaxPhpFn({uri: 'main.php', optionalData: {test: "hello"}});
+    //ajaxPhpFn({uri: '/Hello/world/1234'});
 
     
   </script>

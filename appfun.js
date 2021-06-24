@@ -47,7 +47,7 @@ async function ajaxPhpFn(backendURI, embedId) {
  * }
  */
 async function ajaxPhpFn(params) {
-	if (!params.uri || (!params.formId && !params.optionalData)) {
+	if (!params.uri) {
 		console.log('Missing minimal params');
 	}
 
@@ -88,7 +88,7 @@ async function ajaxPhpFn(params) {
 // Must return a promise 
 function postJSON(params) {
 	let contentType = "";
-	let postBody = "";
+	let postBody = {};
 	const uri = params.uri;
 
 	if (params.formId) { // prepare to pass form data
@@ -108,9 +108,6 @@ function postJSON(params) {
 		if (params.optionalData) {
 			postBody = JSON.stringify(params.optionalData);
 		}
-		else { 
-			postBody = {};
-		}
 	}
 
 	return fetch(uri, {
@@ -123,6 +120,6 @@ function postJSON(params) {
 		},
 		redirect: 'follow', // manual, *follow, error
 		referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-		body: postbody // body data type must match "Content-Type" header
+		body: postBody // body data type must match "Content-Type" header
 	});
 } 
