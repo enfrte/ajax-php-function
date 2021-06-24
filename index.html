@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h4>Simple test</h4>
+  <div id="simple_test">
+    <p>Waiting for backend data...</p>
+  </div>
+
+  	<!-- 
+    * 	uri: 'php controller uri' - required 
+  	* 	formId: 'id of html value' - optional 
+  	* 	optionalData: {key: 'value'} - optional 
+   	*	sendToId: 'id of html element' - optional 
+	-->
+
+  	<button 
+		onclick="ajaxPhpFn({
+			uri: 'buttonCall', 
+			sendToId: 'buttonResult'})" 
+		type="button">
+			Just a button
+	</button>
+  <div id="buttonResult"></div>
+
+  <hr>
+  
+
+  <script src="appfun.js"></script>
+  <script>
+    // Onload example  
+    //ajaxPhpFn('main.php', 'simple_test');
+    ajaxPhpFn({uri: 'main.php', optionalData: {test: "hello"}});
+
+    
+  </script>
+</body>
+</html>
