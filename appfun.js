@@ -1,49 +1,9 @@
-//console.log("Started");
-/*
-  Things to consider... 
-  backendURI  - php function/method to call
-  embedId     - the id where to send it back 
-  post type   - json, form data. If json, use 'Content-Type': 'application/json' If form data 'Content-Type': 'application/x-www-form-urlencoded'
-   - 
-   - 
-   - 
-*/
-
-/**
- * 
- * {
+/** DOCS...
+ * { 
  * 	uri: 'php controller uri' - required 
- * 	formId: 'id of html value' - optional 
+ * 	formId: 'id of form' - optional 
  * 	optionalData: {key: 'value'} - optional 
- * 	sendToId: 'id of html element' - optional 
- * }
- */
-
-/*
-async function ajaxPhpFn(backendURI, embedId) {
-  
-  if (backendURI && embedId) {
-    const return_data = postJSON(backendURI, {data: "Hello"})
-    .then(response => response.text())
-    .then(data => data);
-    console.log(await return_data);
-    destinationElement = document.querySelector('#'+embedId);
-    destinationElement.innerHTML = '<pre>' + await return_data + '</pre>';
-
-  }
-  else if (backendURI) {
-    console.log(backendURI);
-  }
-
-}
-*/
-
-/**
- * {
- * 	uri: 'php controller uri' - required 
- * 	formId: 'id of html value' - optional 
- * 	optionalData: {key: 'value'} - optional 
- * 	sendToId: 'id of html element' - optional 
+ * 	sendToId: 'id of html element you want to send the result to' - optional 
  * }
  */
 async function ajaxPhpFn(params) {
@@ -75,16 +35,6 @@ async function ajaxPhpFn(params) {
 	*/
 }
 
-//function postFormData() { }
-
-/**
- * {
- * 	uri: 'php controller uri' - required 
- * 	formId: 'id of html value' - optional 
- * 	optionalData: {key: 'value'} - optional 
- * 	sendToId: 'id of html element' - optional 
- * }
- */
 // Must return a promise 
 function postJSON(params) {
 	let contentType = "";
