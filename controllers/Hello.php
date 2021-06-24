@@ -8,4 +8,15 @@ class Hello
 	{
 		echo "Hello world ".$arg1;
 	}
+
+	public function sampleData()
+	{
+		print_r($_POST);
+	}
+
+	public function formData()
+	{
+		//var_dump($_POST);
+		print_r($_POST);
+	}
 }

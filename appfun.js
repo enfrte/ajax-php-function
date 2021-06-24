@@ -11,7 +11,7 @@ async function ajaxPhpFn(params) {
 		console.log('Missing minimal params');
 	}
 
-	const return_data = postJSON(params)
+	const return_data = postData(params)
 		.then(response => response.text())
 		.then(data => data);
     console.log(await return_data);
@@ -19,54 +19,42 @@ async function ajaxPhpFn(params) {
 		destinationElement = document.querySelector('#'+params.sendToId);
 		destinationElement.innerHTML = '<pre>' + await return_data + '</pre>';
 	}
-  /*
-	if (backendURI && embedId) {
-    const return_data = postJSON(backendURI, {data: "Hello"})
-    .then(response => response.text())
-    .then(data => data);
-    console.log(await return_data);
-    destinationElement = document.querySelector('#'+embedId);
-    destinationElement.innerHTML = '<pre>' + await return_data + '</pre>';
 
-  }
-  else if (backendURI) {
-    console.log(backendURI);
-  }
-	*/
 }
 
 // Must return a promise 
-function postJSON(params) {
-	let contentType = "";
-	let postBody = {};
+function postData(params) {
 	const uri = params.uri;
+	let formData = new FormData();
 
 	if (params.formId) { // prepare to pass form data
-		contentType = 'application/x-www-form-urlencoded';
 		let formEl = document.getElementById(params.formId);
-		let formData = new FormData(formEl);
+		formData = new FormData(formEl);
 		if (params.optionalData) {	// Optional data (to be added to a form request)
-			// Note: optionalData keys should not conflict with form "name" values
 			for (const [key, value] of Object.entries(params.optionalData)) {
 				formData.append(key, value);
 			}
 		}
-		postBody = formData;
 	}
-	else { // pass json 
-		contentType = 'application/json';
-		if (params.optionalData) {
-			postBody = JSON.stringify(params.optionalData);
+	if (params.optionalData) {	// Optional data (to be added to a form request)
+		// Note: optionalData keys that conflict with form "name" values will create an array of values
+		for (const [key, value] of Object.entries(params.optionalData)) {
+			formData.append(key, value);
 		}
 	}
-
+	let postBody = formData;
+	
 	return fetch(uri, {
 		method: 'POST', 
 		mode: 'cors', // no-cors, *cors, same-origin
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': contentType
+			// Don't use 'Content-Type' to get php POST values. I don't know why it doesn't work.
+			//'Content-Type': 'application/json'
+			//'Content-Type': 'text/plain'
+			//'Content-Type': 'multipart/form-data'
+			//'Content-Type': 'application/x-www-form-urlencoded'
 		},
 		redirect: 'follow', // manual, *follow, error
 		referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
