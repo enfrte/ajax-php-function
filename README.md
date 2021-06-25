@@ -1,7 +1,7 @@
 # ajax-php-function
-An easy way to make ajax requests to php controllers
+An easy way to make ajax requests to php controllers. To see it in action, download and run in apache: http://localhost/ajax-php-function/ The demo comes with a basic controller style router, but you only need to include the `appfun.js` to your own project to make it work. 
 
-Looks a bit like this 
+Using the feature looks a bit like this 
 
 	<form id="form1" onsubmit="ajaxPhpFn({
 			uri: '/ajax-php-function/Hello/formData', 
